@@ -118,8 +118,91 @@ function StarRating({ rating }: { rating: number }) {
   );
 }
 
+/* ───── loading screen ───── */
+function LoadingScreen({ onDone }: { onDone: () => void }) {
+  const [progress, setProgress] = useState(0);
+  const [fadeout, setFadeout] = useState(false);
+
+  useEffect(() => {
+    /* simulate progress with easing */
+    let frame: number;
+    let start: number | null = null;
+    const duration = 2200; // ms
+
+    const animate = (ts: number) => {
+      if (!start) start = ts;
+      const elapsed = ts - start;
+      const raw = Math.min(elapsed / duration, 1);
+      /* ease-out cubic */
+      const eased = 1 - Math.pow(1 - raw, 3);
+      setProgress(Math.round(eased * 100));
+
+      if (raw < 1) {
+        frame = requestAnimationFrame(animate);
+      } else {
+        /* wait a beat, then fade out */
+        setTimeout(() => setFadeout(true), 200);
+        setTimeout(() => onDone(), 900);
+      }
+    };
+
+    frame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(frame);
+  }, []);
+
+  return (
+    <div
+      className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-espresso transition-opacity duration-700 ${
+        fadeout ? 'opacity-0 pointer-events-none' : 'opacity-100'
+      }`}
+    >
+      {/* pulsing tree icon */}
+      <div className="relative mb-8">
+        <div className="absolute inset-0 animate-ping rounded-full bg-sage/20" style={{ animationDuration: '2s' }} />
+        <div className="relative rounded-full bg-sage/10 p-6">
+          <TreePine className="h-16 w-16 text-sage animate-pulse" style={{ animationDuration: '2s' }} />
+        </div>
+      </div>
+
+      {/* brand name */}
+      <h1 className="font-[family-name:var(--font-playfair)] text-3xl sm:text-4xl font-bold text-cream mb-2 tracking-tight">
+        Cafe From The Tree
+      </h1>
+      <p className="text-cream/50 text-sm mb-10">Koregaon Park, Pune</p>
+
+      {/* progress bar */}
+      <div className="w-48 h-1 rounded-full bg-cream/10 overflow-hidden">
+        <div
+          className="h-full rounded-full bg-gradient-to-r from-sage to-warm transition-all duration-150 ease-out"
+          style={{ width: `${progress}%` }}
+        />
+      </div>
+      <p className="mt-3 text-cream/30 text-xs tabular-nums">{progress}%</p>
+
+      {/* floating leaves decoration */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(6)].map((_, i) => (
+          <Leaf
+            key={i}
+            className="absolute text-sage/10"
+            style={{
+              left: `${15 + i * 15}%`,
+              top: `${20 + (i % 3) * 25}%`,
+              width: `${12 + i * 4}px`,
+              height: `${12 + i * 4}px`,
+              animation: `float ${3 + i * 0.5}s ease-in-out infinite`,
+              animationDelay: `${i * 0.4}s`,
+            } as React.CSSProperties}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 /* ───── main page ───── */
 export default function Home() {
+  const [loading, setLoading] = useState(true);
   const [scrolled, setScrolled] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
@@ -178,7 +261,11 @@ export default function Home() {
 
   /* ──────────────────── RENDER ──────────────────── */
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <>
+      {loading && <LoadingScreen onDone={() => setLoading(false)} />}
+      <div className={`min-h-screen flex flex-col bg-background transition-opacity duration-500 ${loading ? 'opacity-0' : 'opacity-100'}`}>
+        {/* prevent scroll while loading */}
+        {loading && <style dangerouslySetInnerHTML={{ __html: 'body{overflow:hidden}' }} />}
       {/* ─── NAVBAR ─── */}
       <header
         className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
@@ -837,6 +924,7 @@ export default function Home() {
           <ArrowUp className="h-5 w-5" />
         </button>
       )}
-    </div>
+      </div>
+    </>
   );
 }
