@@ -14,25 +14,28 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Cafe From The Tree | Koregaon Park, Pune",
+  title: "ZENZI Restaurant Cafe | Dhole Patil Road, Pune",
   description:
-    "A cozy tree-shaded cafe in Koregaon Park, Pune serving artisan sourdough pizzas, handcrafted coffees, and fresh Italian-inspired cuisine. Warm ambience, great food, unforgettable experience.",
+    "ZENZI Restaurant Cafe — Premium North Indian, Mughlai, Chinese & Seafood dining in Pune. Warm atmosphere, family-friendly, unforgettable flavors. Rated 4.9 on JustDial.",
   keywords: [
-    "Cafe From The Tree",
-    "Pune cafe",
-    "Koregaon Park",
-    "sourdough pizza",
-    "Italian cafe",
-    "coffee shop Pune",
+    "ZENZI",
+    "ZENZI Restaurant Cafe",
+    "Pune restaurant",
+    "Dhole Patil Road",
+    "North Indian",
+    "Mughlai",
+    "Biryani",
+    "Chinese",
+    "Seafood",
+    "Kebab",
   ],
-  authors: [{ name: "Cafe From The Tree" }],
+  authors: [{ name: "ZENZI Restaurant Cafe" }],
   icons: {
-    icon: "/images/logo-cafe.png",
+    icon: "/images/zenzi/logo.png",
   },
   openGraph: {
-    title: "Cafe From The Tree | Koregaon Park, Pune",
-    description:
-      "Artisan sourdough pizzas & handcrafted coffees under the trees",
+    title: "ZENZI Restaurant Cafe | Pune",
+    description: "Premium North Indian, Mughlai & Chinese dining in Pune",
     type: "website",
   },
 };

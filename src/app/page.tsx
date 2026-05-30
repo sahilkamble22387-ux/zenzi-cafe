@@ -9,22 +9,24 @@ import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import {
-  TreePine,
+  UtensilsCrossed,
   MapPin,
   Phone,
   Clock,
-  Instagram,
   Star,
   Menu,
   ChevronDown,
-  Leaf,
-  Coffee,
-  Pizza,
+  Flame,
+  Soup,
+  GlassWater,
   Heart,
   ArrowUp,
   Mail,
   Send,
   Loader2,
+  Sparkles,
+  Crown,
+  ChefHat,
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
@@ -40,67 +42,76 @@ const NAV_LINKS = [
 
 const MENU_CATEGORIES = [
   {
-    title: 'Signature Pizzas',
-    icon: Pizza,
+    title: 'Starters & Soups',
+    icon: Soup,
     items: [
-      { name: 'Siciliano Sourdough', desc: 'House-made dough, fresh basil, sun-dried tomatoes, mozzarella', price: '₹449', tag: 'Bestseller' },
-      { name: 'Margherita Classica', desc: 'San Marzano tomatoes, fresh buffalo mozzarella, basil', price: '₹379', tag: 'Classic' },
-      { name: 'Mango Habanero Special', desc: 'Mango habanero sauce, jalapeños, mozzarella, fresh cilantro', price: '₹499', tag: 'Chef\'s Special' },
-      { name: 'Truffle Mushroom', desc: 'Wild mushrooms, truffle oil, fontina, arugula', price: '₹549', tag: 'New' },
+      { name: 'Chicken Manchow Soup', desc: 'Spicy thick soup with minced chicken, crispy noodles & fresh herbs', price: '₹199', tag: 'Popular' },
+      { name: 'Paneer Tikka', desc: 'Marinated cottage cheese cubes, chargrilled in tandoor with mint chutney', price: '₹299', tag: 'Must Try' },
+      { name: 'Chicken Malai Tikka', desc: 'Creamy marinated chicken, tender and succulent from the tandoor', price: '₹329', tag: 'Chef\'s Pick' },
+      { name: 'Veg Spring Rolls', desc: 'Crispy rolls stuffed with seasoned vegetables & glass noodles', price: '₹229', tag: '' },
     ],
   },
   {
-    title: 'Starters & Sides',
-    icon: Leaf,
+    title: 'Mughlai & Biryani',
+    icon: Crown,
     items: [
-      { name: 'Cheesy Jalapeño Poppers', desc: 'Crispy jalapeño poppers with habanero cheese dip', price: '₹299', tag: 'Popular' },
-      { name: 'Holy Guacamole', desc: 'Fresh avocado, olives, candied walnuts, sourdough toast', price: '₹349', tag: 'Vegan' },
-      { name: 'Bruschetta Trio', desc: 'Three artisan bruschetta with seasonal toppings', price: '₹329', tag: '' },
-      { name: 'Garlic Bread Supreme', desc: 'Sourdough garlic bread with herb butter & cheese', price: '₹249', tag: '' },
+      { name: 'Mutton Biryani', desc: 'Slow-cooked aromatic basmati rice layered with tender mutton & saffron', price: '₹449', tag: 'Signature' },
+      { name: 'Chicken Biryani', desc: 'Fragrant long-grain basmati with succulent chicken & whole spices', price: '₹369', tag: 'Bestseller' },
+      { name: 'Paneer Butter Masala', desc: 'Rich tomato-cream gravy with soft paneer cubes, Mughlai style', price: '₹319', tag: '' },
+      { name: 'Mutton Korma', desc: 'Royal Mughlai preparation with creamy cashew & yogurt gravy', price: '₹429', tag: 'Royal' },
     ],
   },
   {
-    title: 'Beverages',
-    icon: Coffee,
+    title: 'Chinese & Schezwan',
+    icon: Flame,
     items: [
-      { name: 'Cappuccino', desc: 'Double-shot espresso with velvety steamed milk & latte art', price: '₹199', tag: 'Must Try' },
-      { name: 'Matcha Latte', desc: 'Ceremonial grade matcha with oat milk', price: '₹249', tag: '' },
-      { name: 'Fresh Cold Pressed Juice', desc: 'Seasonal fruits, pressed fresh daily', price: '₹179', tag: 'Healthy' },
-      { name: 'Iced Caramel Mocha', desc: 'Espresso, caramel, chocolate, cold milk & ice', price: '₹269', tag: '' },
+      { name: 'Veg Schezwan Noodles', desc: 'Fiery Schezwan sauce tossed with hakka noodles & crunchy vegetables', price: '₹200', tag: 'Spicy' },
+      { name: 'Chicken Manchurian', desc: 'Crispy chicken balls in tangy manchurian sauce, Indo-Chinese style', price: '₹319', tag: 'Popular' },
+      { name: 'Veg Triple Schezwan Rice', desc: 'Spicy fried rice with schezwan sauce, mixed vegetables & chilli flakes', price: '₹220', tag: '' },
+      { name: 'Chilli Chicken Dry', desc: 'Crispy chicken tossed with peppers, onions & spicy chilli sauce', price: '₹339', tag: 'Must Try' },
+    ],
+  },
+  {
+    title: 'Beverages & Desserts',
+    icon: GlassWater,
+    items: [
+      { name: 'Fresh Lime Soda', desc: 'Refreshing sweet & salty lime with crushed ice', price: '₹99', tag: '' },
+      { name: 'Mango Lassi', desc: 'Thick creamy yogurt blended with fresh mango pulp', price: '₹149', tag: 'Seasonal' },
+      { name: 'Gulab Jamun', desc: 'Soft milk-solid dumplings soaked in rose-cardamom sugar syrup', price: '₹129', tag: 'Classic' },
+      { name: 'Rasmalai', desc: 'Delicate paneer patties in saffron-infused sweetened milk', price: '₹149', tag: 'Must Try' },
     ],
   },
 ];
 
 const REVIEWS = [
   {
-    name: 'Arjun M.',
-    text: 'Hands down the best pizza I\'ve ever had in Pune! The crust was perfectly crisp with just the right chew, and the toppings were fresh and full of flavor.',
+    name: 'Amit P.',
+    text: 'Absolutely amazing food! The mutton biryani is to die for — perfectly layered with aromatic rice and tender meat. The Mughlai flavors are authentic and rich.',
+    rating: 5,
+    source: 'JustDial',
+  },
+  {
+    name: 'Neha R.',
+    text: 'Great place for family dining. Comforting atmosphere, healthy and delicious food with good quality. The staff is courteous and the service is prompt.',
+    rating: 5,
+    source: 'Zomato',
+  },
+  {
+    name: 'Vikram S.',
+    text: 'The corn soup with Cantonese base is incredible! Their Indo-Chinese is some of the best in Pune. Chilli chicken and Manchurian are must-tries.',
     rating: 5,
     source: 'Google',
   },
   {
-    name: 'Priya S.',
-    text: 'The ambience is warm and inviting, with comfortable seating and a relaxed atmosphere. The staff is friendly and attentive, ensuring each guest has a memorable experience.',
+    name: 'Pooja M.',
+    text: 'Warm atmosphere and attentive service — ZENZI is a must-visit. The paneer butter masala and naan combo is heavenly. Will keep coming back!',
     rating: 5,
-    source: 'Magicpin',
-  },
-  {
-    name: 'Rahul K.',
-    text: 'Tried the Siciliano sourdough pizza and it tasted amazing because all of their ingredients — dough, sauce — are made fresh in-house. Truly authentic!',
-    rating: 5,
-    source: 'Reddit',
-  },
-  {
-    name: 'Sneha D.',
-    text: 'The Mango Habanero Cheesy Jalapeño Poppers were bold and indulgent, the Holy Guacamole with olives & candied walnuts added a gourmet twist. Absolutely loved it!',
-    rating: 5,
-    source: 'Zomato',
+    source: 'Swiggy',
   },
 ];
 
 const HOURS = [
-  { day: 'Monday – Friday', time: '10:00 AM – 11:00 PM' },
-  { day: 'Saturday – Sunday', time: '9:00 AM – 11:30 PM' },
+  { day: 'Monday – Sunday', time: '11:00 AM – 11:30 PM' },
 ];
 
 /* ───── tiny components ───── */
@@ -111,7 +122,7 @@ function StarRating({ rating }: { rating: number }) {
         <Star
           key={i}
           size={14}
-          className={i < rating ? 'fill-warm text-warm' : 'text-muted-foreground/30'}
+          className={i < rating ? 'fill-gold text-gold' : 'text-muted-foreground/30'}
         />
       ))}
     </div>
@@ -124,23 +135,20 @@ function LoadingScreen({ onDone }: { onDone: () => void }) {
   const [fadeout, setFadeout] = useState(false);
 
   useEffect(() => {
-    /* simulate progress with easing */
     let frame: number;
     let start: number | null = null;
-    const duration = 2200; // ms
+    const duration = 2200;
 
     const animate = (ts: number) => {
       if (!start) start = ts;
       const elapsed = ts - start;
       const raw = Math.min(elapsed / duration, 1);
-      /* ease-out cubic */
       const eased = 1 - Math.pow(1 - raw, 3);
       setProgress(Math.round(eased * 100));
 
       if (raw < 1) {
         frame = requestAnimationFrame(animate);
       } else {
-        /* wait a beat, then fade out */
         setTimeout(() => setFadeout(true), 200);
         setTimeout(() => onDone(), 900);
       }
@@ -152,44 +160,47 @@ function LoadingScreen({ onDone }: { onDone: () => void }) {
 
   return (
     <div
-      className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-espresso transition-opacity duration-700 ${
+      className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-charcoal transition-opacity duration-700 ${
         fadeout ? 'opacity-0 pointer-events-none' : 'opacity-100'
       }`}
     >
-      {/* pulsing tree icon */}
+      {/* Animated crown icon */}
       <div className="relative mb-8">
-        <div className="absolute inset-0 animate-ping rounded-full bg-sage/20" style={{ animationDuration: '2s' }} />
-        <div className="relative rounded-full bg-sage/10 p-6">
-          <TreePine className="h-16 w-16 text-sage animate-pulse" style={{ animationDuration: '2s' }} />
+        <div className="absolute inset-0 animate-ping rounded-full bg-gold/20" style={{ animationDuration: '2s' }} />
+        <div className="relative rounded-full bg-gold/10 p-6">
+          <Crown className="h-16 w-16 text-gold animate-pulse" style={{ animationDuration: '2s' }} />
         </div>
       </div>
 
-      {/* brand name */}
-      <h1 className="font-[family-name:var(--font-playfair)] text-3xl sm:text-4xl font-bold text-cream mb-2 tracking-tight">
-        Cafe From The Tree
+      {/* Brand name with glow */}
+      <h1
+        className="font-[family-name:var(--font-playfair)] text-4xl sm:text-5xl font-bold text-cream mb-1 tracking-widest"
+        style={{ animation: 'glow 3s ease-in-out infinite' }}
+      >
+        ZENZI
       </h1>
-      <p className="text-cream/50 text-sm mb-10">Koregaon Park, Pune</p>
+      <p className="text-gold/60 text-sm tracking-[0.3em] mb-10">RESTAURANT &nbsp; CAFE</p>
 
-      {/* progress bar */}
-      <div className="w-48 h-1 rounded-full bg-cream/10 overflow-hidden">
+      {/* Progress bar */}
+      <div className="w-52 h-0.5 rounded-full bg-cream/10 overflow-hidden">
         <div
-          className="h-full rounded-full bg-gradient-to-r from-sage to-warm transition-all duration-150 ease-out"
+          className="h-full rounded-full bg-gradient-to-r from-gold to-saffron transition-all duration-150 ease-out"
           style={{ width: `${progress}%` }}
         />
       </div>
-      <p className="mt-3 text-cream/30 text-xs tabular-nums">{progress}%</p>
+      <p className="mt-3 text-cream/20 text-xs tabular-nums">{progress}%</p>
 
-      {/* floating leaves decoration */}
+      {/* Decorative sparkles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(6)].map((_, i) => (
-          <Leaf
+          <Sparkles
             key={i}
-            className="absolute text-sage/10"
+            className="absolute text-gold/10"
             style={{
-              left: `${15 + i * 15}%`,
-              top: `${20 + (i % 3) * 25}%`,
-              width: `${12 + i * 4}px`,
-              height: `${12 + i * 4}px`,
+              left: `${10 + i * 16}%`,
+              top: `${15 + (i % 3) * 28}%`,
+              width: `${14 + i * 3}px`,
+              height: `${14 + i * 3}px`,
               animation: `float ${3 + i * 0.5}s ease-in-out infinite`,
               animationDelay: `${i * 0.4}s`,
             } as React.CSSProperties}
@@ -209,14 +220,12 @@ export default function Home() {
   const [sending, setSending] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const { toast } = useToast();
-  const contactRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 50);
       setShowScrollTop(window.scrollY > 600);
 
-      /* detect active section */
       const sections = NAV_LINKS.map((l) => l.href.replace('#', ''));
       for (let i = sections.length - 1; i >= 0; i--) {
         const el = document.getElementById(sections[i]);
@@ -245,7 +254,7 @@ export default function Home() {
         }),
       });
       if (!res.ok) throw new Error('Failed');
-      toast({ title: 'Message sent!', description: "We'll get back to you soon. Thank you!" });
+      toast({ title: 'Message sent!', description: "We'll get back to you shortly. Thank you!" });
       (e.target as HTMLFormElement).reset();
     } catch {
       toast({ title: 'Error', description: 'Could not send message. Please try again.', variant: 'destructive' });
@@ -259,13 +268,12 @@ export default function Home() {
     document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  /* ──────────────────── RENDER ──────────────────── */
   return (
     <>
       {loading && <LoadingScreen onDone={() => setLoading(false)} />}
       <div className={`min-h-screen flex flex-col bg-background transition-opacity duration-500 ${loading ? 'opacity-0' : 'opacity-100'}`}>
-        {/* prevent scroll while loading */}
         {loading && <style dangerouslySetInnerHTML={{ __html: 'body{overflow:hidden}' }} />}
+
       {/* ─── NAVBAR ─── */}
       <header
         className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
@@ -275,17 +283,13 @@ export default function Home() {
         }`}
       >
         <nav className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 h-16 sm:h-20">
-          {/* Logo */}
-          <button onClick={() => scrollTo('#home')} className="flex items-center gap-2 group">
-            <TreePine className="h-7 w-7 text-primary transition-transform group-hover:scale-110" />
-            <span
-              className="font-[family-name:var(--font-playfair)] text-lg sm:text-xl font-bold text-foreground tracking-tight"
-            >
-              Cafe&nbsp;From&nbsp;The&nbsp;Tree
+          <button onClick={() => scrollTo('#home')} className="flex items-center gap-2.5 group">
+            <Crown className="h-6 w-6 text-gold transition-transform group-hover:scale-110" />
+            <span className="font-[family-name:var(--font-playfair)] text-xl sm:text-2xl font-bold text-foreground tracking-[0.15em]">
+              ZENZI
             </span>
           </button>
 
-          {/* Desktop links */}
           <ul className="hidden md:flex items-center gap-1">
             {NAV_LINKS.map((l) => (
               <li key={l.href}>
@@ -303,17 +307,15 @@ export default function Home() {
             ))}
           </ul>
 
-          {/* CTA + Mobile */}
           <div className="flex items-center gap-2">
             <Button
               size="sm"
-              className="hidden sm:inline-flex bg-primary hover:bg-forest-light text-primary-foreground rounded-full"
+              className="hidden sm:inline-flex bg-primary hover:bg-burgundy-light text-primary-foreground rounded-full"
               onClick={() => scrollTo('#contact')}
             >
               Reserve a Table
             </Button>
 
-            {/* Mobile hamburger */}
             <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" className="md:hidden">
@@ -337,7 +339,7 @@ export default function Home() {
                   ))}
                   <Separator className="my-2" />
                   <Button
-                    className="mx-4 bg-primary hover:bg-forest-light text-primary-foreground rounded-full"
+                    className="mx-4 bg-primary hover:bg-burgundy-light text-primary-foreground rounded-full"
                     onClick={() => scrollTo('#contact')}
                   >
                     Reserve a Table
@@ -354,33 +356,34 @@ export default function Home() {
         id="home"
         className="relative min-h-screen flex items-center justify-center overflow-hidden"
       >
-        {/* Background */}
         <div className="absolute inset-0">
           <img
-            src="/images/hero.png"
-            alt="Cafe From The Tree outdoor terrace"
+            src="/images/zenzi/hero.png"
+            alt="ZENZI Restaurant Cafe exterior"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
+          <div className="absolute inset-0 bg-gradient-to-b from-charcoal/70 via-charcoal/50 to-charcoal/80" />
         </div>
 
-        {/* Content */}
         <div className="relative z-10 text-center px-4 sm:px-6 max-w-4xl mx-auto">
-          <Badge className="mb-4 bg-warm/20 text-warm border-warm/30 backdrop-blur-sm text-sm px-4 py-1">
-            <Leaf className="h-3.5 w-3.5 mr-1.5" /> Koregaon Park, Pune
+          <Badge className="mb-5 bg-gold/20 text-gold border-gold/30 backdrop-blur-sm text-sm px-4 py-1 tracking-wider">
+            <Crown className="h-3.5 w-3.5 mr-1.5" /> EST. IN PUNE
           </Badge>
-          <h1 className="font-[family-name:var(--font-playfair)] text-4xl sm:text-5xl md:text-7xl font-bold text-white leading-tight mb-6">
-            Where Nature Meets
-            <br />
-            <span className="text-warm">Great Food</span>
+          <h1 className="font-[family-name:var(--font-playfair)] text-5xl sm:text-6xl md:text-8xl font-bold text-cream leading-tight mb-6 tracking-wider"
+            style={{ animation: 'glow 3s ease-in-out infinite' }}
+          >
+            ZENZI
           </h1>
-          <p className="text-white/80 text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-8 leading-relaxed">
-            Artisan sourdough pizzas, handcrafted coffees & Italian-inspired cuisine — served under the shade of towering trees.
+          <p className="text-gold/80 text-lg sm:text-xl tracking-[0.3em] mb-4 font-light">
+            RESTAURANT &nbsp;&bull;&nbsp; CAFE
+          </p>
+          <p className="text-cream/70 text-base sm:text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
+            Where royal Mughlai flavors meet contemporary dining. North Indian, Chinese, Biryani & Seafood — crafted for the connoisseur.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               size="lg"
-              className="bg-warm hover:bg-warm-dark text-white rounded-full text-base px-8"
+              className="bg-gold hover:bg-gold-light text-charcoal rounded-full text-base px-8 font-semibold"
               onClick={() => scrollTo('#menu')}
             >
               Explore Menu
@@ -388,7 +391,7 @@ export default function Home() {
             <Button
               size="lg"
               variant="outline"
-              className="border-warm/60 text-warm hover:bg-warm/10 rounded-full text-base px-8 backdrop-blur-sm"
+              className="border-gold/50 text-gold hover:bg-gold/10 rounded-full text-base px-8 backdrop-blur-sm"
               onClick={() => scrollTo('#contact')}
             >
               Book a Table
@@ -396,10 +399,9 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Scroll hint */}
         <button
           onClick={() => scrollTo('#about')}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/60 hover:text-white transition animate-bounce"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 text-cream/50 hover:text-cream transition animate-bounce"
         >
           <ChevronDown className="h-8 w-8" />
         </button>
@@ -409,44 +411,44 @@ export default function Home() {
       <section id="about" className="py-20 sm:py-28 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
-            {/* Image */}
             <div className="relative">
               <div className="rounded-2xl overflow-hidden shadow-2xl">
                 <img
-                  src="/images/ambience.png"
-                  alt="Cafe From The Tree interior"
+                  src="/images/zenzi/ambience.png"
+                  alt="ZENZI Restaurant interior"
                   className="w-full h-[400px] sm:h-[500px] object-cover"
                 />
               </div>
               <div className="absolute -bottom-6 -right-6 bg-primary text-primary-foreground rounded-2xl p-5 shadow-xl hidden sm:block">
-                <p className="font-[family-name:var(--font-playfair)] text-3xl font-bold">5K+</p>
-                <p className="text-sm text-primary-foreground/80">Happy Followers</p>
+                <p className="font-[family-name:var(--font-playfair)] text-3xl font-bold">4.9</p>
+                <p className="text-sm text-primary-foreground/80 flex items-center gap-1">
+                  <Star className="h-3 w-3 fill-current" /> Rating on JustDial
+                </p>
               </div>
             </div>
 
-            {/* Text */}
             <div>
               <Badge variant="secondary" className="mb-4 text-primary">
-                <TreePine className="h-3.5 w-3.5 mr-1" /> Our Story
+                <Sparkles className="h-3.5 w-3.5 mr-1" /> Our Story
               </Badge>
               <h2 className="font-[family-name:var(--font-playfair)] text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
-                Rooted in Passion,
+                A Culinary
                 <br />
-                <span className="text-primary">Growing with Love</span>
+                <span className="text-primary">Royal Affair</span>
               </h2>
               <p className="text-muted-foreground text-base sm:text-lg leading-relaxed mb-6">
-                Nestled in the heart of Koregaon Park, Cafe From The Tree is more than just a cafe — it&apos;s a sanctuary where the warmth of Italian cuisine meets the serenity of nature. Our founder&apos;s dream was simple: create a space where every meal feels like a breath of fresh air.
+                ZENZI Restaurant Cafe is where tradition meets modern elegance. Nestled on Dhole Patil Road in the heart of Pune, we bring you the finest North Indian, Mughlai, and Indo-Chinese cuisine — each dish a masterpiece of flavor and craft.
               </p>
               <p className="text-muted-foreground text-base sm:text-lg leading-relaxed mb-8">
-                From our house-made sourdough to our carefully sourced ingredients, every dish tells a story of craftsmanship and care. Whether you&apos;re here for a quiet coffee or a lively dinner with friends, we promise an experience that&apos;s as refreshing as the trees that shade our terrace.
+                From our aromatic biryanis slow-cooked with saffron to our sizzling Schezwan specials, every plate at ZENZI tells a story of passion, quality ingredients, and culinary excellence. Whether it&apos;s a family dinner or a celebration, we make every meal memorable.
               </p>
 
               <div className="grid grid-cols-2 gap-6">
                 {[
-                  { icon: Pizza, label: 'Sourdough Pizzas', sub: 'Made fresh daily' },
-                  { icon: Coffee, label: 'Artisan Coffee', sub: 'Handcrafted brews' },
-                  { icon: Leaf, label: 'Fresh Ingredients', sub: 'Locally sourced' },
-                  { icon: Heart, label: 'Made with Love', sub: 'Every single time' },
+                  { icon: Crown, label: 'Mughlai Heritage', sub: 'Royal recipes' },
+                  { icon: ChefHat, label: 'Master Chefs', sub: 'Expertly crafted' },
+                  { icon: Flame, label: 'Indo-Chinese', sub: 'Fiery & flavorful' },
+                  { icon: Heart, label: 'Family Friendly', sub: 'Warm & welcoming' },
                 ].map((item) => (
                   <div key={item.label} className="flex items-start gap-3">
                     <div className="rounded-lg bg-primary/10 p-2.5">
@@ -465,30 +467,30 @@ export default function Home() {
       </section>
 
       {/* ─── MENU ─── */}
-      <section id="menu" className="py-20 sm:py-28 bg-cream dark:bg-espresso/20">
+      <section id="menu" className="py-20 sm:py-28 bg-ivory">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-14">
             <Badge variant="secondary" className="mb-4 text-primary">
-              <Pizza className="h-3.5 w-3.5 mr-1" /> What We Serve
+              <UtensilsCrossed className="h-3.5 w-3.5 mr-1" /> Our Cuisine
             </Badge>
             <h2 className="font-[family-name:var(--font-playfair)] text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
-              Our <span className="text-primary">Menu</span>
+              The <span className="text-primary">Menu</span>
             </h2>
             <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto">
-              Every dish is crafted with love using the freshest ingredients, from our signature sourdough to our artisan beverages.
+              From royal Mughlai delicacies to fiery Indo-Chinese — every dish is a celebration of flavor, made with the freshest ingredients.
             </p>
           </div>
 
           {/* Food images strip */}
           <div className="grid grid-cols-3 gap-4 mb-14">
             <div className="rounded-2xl overflow-hidden shadow-lg aspect-square">
-              <img src="/images/pizza.png" alt="Sourdough Pizza" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+              <img src="/images/zenzi/food1.png" alt="Mughlai Cuisine" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
             </div>
             <div className="rounded-2xl overflow-hidden shadow-lg aspect-square">
-              <img src="/images/coffee.png" alt="Artisan Coffee" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+              <img src="/images/zenzi/food2.png" alt="Indo-Chinese" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
             </div>
             <div className="rounded-2xl overflow-hidden shadow-lg aspect-square">
-              <img src="/images/starters.png" alt="Starters" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+              <img src="/images/zenzi/drinks.png" alt="Beverages & Desserts" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
             </div>
           </div>
 
@@ -515,7 +517,7 @@ export default function Home() {
                           <div className="flex items-center gap-2 mb-1">
                             <h4 className="font-semibold text-base">{item.name}</h4>
                             {item.tag && (
-                              <Badge className="text-[10px] px-1.5 py-0 bg-warm/15 text-warm-dark dark:text-warm border-0 shrink-0">
+                              <Badge className="text-[10px] px-1.5 py-0 bg-gold/15 text-saffron border-0 shrink-0">
                                 {item.tag}
                               </Badge>
                             )}
@@ -540,7 +542,7 @@ export default function Home() {
             <Button
               variant="outline"
               className="rounded-full border-primary text-primary hover:bg-primary hover:text-primary-foreground"
-              onClick={() => window.open('https://www.zomato.com/pune/cafe-from-the-tree-koregaon-park', '_blank')}
+              onClick={() => window.open('https://www.zomato.com/pune/zenzi-cafe-dhole-patil-road', '_blank')}
             >
               View Full Menu on Zomato
             </Button>
@@ -553,32 +555,32 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-14">
             <Badge variant="secondary" className="mb-4 text-primary">
-              <Leaf className="h-3.5 w-3.5 mr-1" /> Feel the Vibe
+              <Sparkles className="h-3.5 w-3.5 mr-1" /> Experience
             </Badge>
             <h2 className="font-[family-name:var(--font-playfair)] text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
               Our <span className="text-primary">Ambience</span>
             </h2>
             <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto">
-              Step into a world where rustic charm meets modern comfort — a space designed to make every moment memorable.
+              A space where elegance meets warmth — designed for unforgettable evenings with family and friends.
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
             {[
               {
-                img: '/images/ambience.png',
-                title: 'Indoor Seating',
-                desc: 'Cozy interiors with warm lighting, exposed brick, and lush greenery.',
+                img: '/images/zenzi/ambience.png',
+                title: 'Indoor Elegance',
+                desc: 'Plush seating, warm pendant lights, and contemporary Indian decor for an intimate dining experience.',
               },
               {
-                img: '/images/hero.png',
-                title: 'Outdoor Terrace',
-                desc: 'Dine under the trees with fairy lights and Pune\'s beautiful weather.',
+                img: '/images/zenzi/hero.png',
+                title: 'Outdoor Lounge',
+                desc: 'Al fresco seating with ambient lighting — perfect for Pune\'s beautiful evenings.',
               },
               {
-                img: '/images/coffee.png',
-                title: 'Coffee Corner',
-                desc: 'Watch our baristas craft your perfect cup at our open coffee bar.',
+                img: '/images/zenzi/drinks.png',
+                title: 'Bar & Beverages',
+                desc: 'Expertly crafted mocktails, fresh juices, and classic beverages to complement your meal.',
               },
             ].map((item) => (
               <Card
@@ -605,17 +607,17 @@ export default function Home() {
       </section>
 
       {/* ─── REVIEWS ─── */}
-      <section id="reviews" className="py-20 sm:py-28 bg-cream dark:bg-espresso/20">
+      <section id="reviews" className="py-20 sm:py-28 bg-ivory">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-14">
             <Badge variant="secondary" className="mb-4 text-primary">
-              <Star className="h-3.5 w-3.5 mr-1" /> What People Say
+              <Star className="h-3.5 w-3.5 mr-1" /> Testimonials
             </Badge>
             <h2 className="font-[family-name:var(--font-playfair)] text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
-              Loved by <span className="text-primary">Thousands</span>
+              What Our <span className="text-primary">Guests Say</span>
             </h2>
             <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto">
-              Don&apos;t just take our word for it — hear from the people who make us who we are.
+              Rated 4.9 on JustDial with over 1,100 reviews — our guests speak for us.
             </p>
           </div>
 
@@ -648,7 +650,7 @@ export default function Home() {
               className="rounded-full border-primary text-primary hover:bg-primary hover:text-primary-foreground"
               onClick={() =>
                 window.open(
-                  'https://www.google.co.in/maps/place/Cafe+From+The+Tree,+KP/@18.540862,73.8873651,17z',
+                  'https://www.google.co.in/maps/place/ZENZI+Restaurant+Cafe/@18.5356005,73.8749616,17z',
                   '_blank'
                 )
               }
@@ -660,7 +662,7 @@ export default function Home() {
       </section>
 
       {/* ─── CONTACT ─── */}
-      <section id="contact" className="py-20 sm:py-28 bg-background" ref={contactRef}>
+      <section id="contact" className="py-20 sm:py-28 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-14">
             <Badge variant="secondary" className="mb-4 text-primary">
@@ -670,47 +672,45 @@ export default function Home() {
               Visit <span className="text-primary">Us</span>
             </h2>
             <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto">
-              We&apos;d love to host you. Drop by, call us, or send a message — we&apos;re always happy to hear from you.
+              We&apos;d love to host you. Reserve a table or drop by — every visit to ZENZI is special.
             </p>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-12">
-            {/* Info + Map */}
             <div className="space-y-8">
-              {/* Contact cards */}
               <div className="grid sm:grid-cols-2 gap-4">
                 {[
                   {
                     icon: MapPin,
                     title: 'Location',
-                    detail: 'Koregaon Park, Pune',
-                    sub: 'Maharashtra 411001',
+                    detail: 'Dhole Patil Road, Pune',
+                    sub: 'Near Tadiwala Road',
                     action: () =>
                       window.open(
-                        'https://www.google.co.in/maps/place/Cafe+From+The+Tree,+KP/@18.540862,73.8873651,17z',
+                        'https://www.google.co.in/maps/place/ZENZI+Restaurant+Cafe/@18.5356005,73.8749616,17z',
                         '_blank'
                       ),
                   },
                   {
                     icon: Phone,
                     title: 'Phone',
-                    detail: '+91 80104 70334',
+                    detail: '+91 75173 28661',
                     sub: 'Call for reservations',
-                    action: () => window.open('tel:+918010470334'),
+                    action: () => window.open('tel:+917517328661'),
                   },
                   {
                     icon: Clock,
                     title: 'Hours',
-                    detail: 'Mon–Fri: 10 AM – 11 PM',
-                    sub: 'Sat–Sun: 9 AM – 11:30 PM',
+                    detail: 'Open 7 Days a Week',
+                    sub: '11:00 AM – 11:30 PM',
                     action: () => null,
                   },
                   {
-                    icon: Instagram,
-                    title: 'Instagram',
-                    detail: '@cafefromthetree',
-                    sub: '5K+ followers',
-                    action: () => window.open('https://instagram.com/cafefromthetree', '_blank'),
+                    icon: UtensilsCrossed,
+                    title: 'Cuisines',
+                    detail: 'North Indian, Mughlai',
+                    sub: 'Chinese, Seafood, Kebab',
+                    action: () => null,
                   },
                 ].map((c) => (
                   <Card
@@ -732,29 +732,27 @@ export default function Home() {
                 ))}
               </div>
 
-              {/* Map embed */}
               <div className="rounded-2xl overflow-hidden shadow-lg border border-border h-[260px]">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3783.2!2d73.8873651!3d18.540862!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c1feee7fd99d%3A0x14cc84cc7519560!2sCafe%20From%20The%20Tree!5e0!3m2!1sen!2sin!4v1"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3783.2!2d73.8749616!3d18.5356005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c1f483072a41%3A0x1bfda927ae5b2fc3!2sZENZI%20Restaurant%20Cafe!5e0!3m2!1sen!2sin!4v1"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="Cafe From The Tree Location"
+                  title="ZENZI Restaurant Cafe Location"
                 />
               </div>
             </div>
 
-            {/* Contact form */}
             <Card className="shadow-xl border-border/50">
               <CardContent className="p-6 sm:p-8">
                 <h3 className="font-[family-name:var(--font-playfair)] text-2xl font-bold mb-2">
-                  Send Us a Message
+                  Reserve a Table
                 </h3>
                 <p className="text-muted-foreground text-sm mb-6">
-                  Have a question or want to reserve a table? We&apos;ll get back to you shortly.
+                  Planning a visit? Send us your details and we&apos;ll confirm your reservation.
                 </p>
                 <form onSubmit={handleContact} className="space-y-4">
                   <div>
@@ -783,7 +781,7 @@ export default function Home() {
                     <Textarea
                       id="message"
                       name="message"
-                      placeholder="Tell us what you need — reservations, private events, feedback..."
+                      placeholder="Tell us — date, time, number of guests, special requests..."
                       rows={5}
                       required
                       className="rounded-lg resize-none"
@@ -792,14 +790,14 @@ export default function Home() {
                   <Button
                     type="submit"
                     disabled={sending}
-                    className="w-full bg-primary hover:bg-forest-light text-primary-foreground rounded-lg py-5 text-base"
+                    className="w-full bg-primary hover:bg-burgundy-light text-primary-foreground rounded-lg py-5 text-base"
                   >
                     {sending ? (
                       <Loader2 className="h-4 w-4 animate-spin mr-2" />
                     ) : (
                       <Send className="h-4 w-4 mr-2" />
                     )}
-                    {sending ? 'Sending...' : 'Send Message'}
+                    {sending ? 'Sending...' : 'Reserve Now'}
                   </Button>
                 </form>
               </CardContent>
@@ -809,23 +807,21 @@ export default function Home() {
       </section>
 
       {/* ─── FOOTER ─── */}
-      <footer className="mt-auto bg-espresso text-cream">
+      <footer className="mt-auto bg-charcoal text-cream">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
-            {/* Brand */}
             <div className="sm:col-span-2 lg:col-span-1">
-              <div className="flex items-center gap-2 mb-4">
-                <TreePine className="h-6 w-6 text-sage" />
-                <span className="font-[family-name:var(--font-playfair)] text-xl font-bold text-cream">
-                  Cafe From The Tree
+              <div className="flex items-center gap-2.5 mb-4">
+                <Crown className="h-6 w-6 text-gold" />
+                <span className="font-[family-name:var(--font-playfair)] text-2xl font-bold text-cream tracking-wider">
+                  ZENZI
                 </span>
               </div>
-              <p className="text-cream/60 text-sm leading-relaxed">
-                Artisan sourdough pizzas &amp; handcrafted coffees under the trees. A cozy escape in the heart of Koregaon Park.
+              <p className="text-cream/50 text-sm leading-relaxed">
+                Premium North Indian, Mughlai, Chinese & Seafood dining in the heart of Pune. A culinary experience like no other.
               </p>
             </div>
 
-            {/* Quick links */}
             <div>
               <h4 className="font-semibold text-cream mb-4">Quick Links</h4>
               <ul className="space-y-2">
@@ -833,7 +829,7 @@ export default function Home() {
                   <li key={l.href}>
                     <button
                       onClick={() => scrollTo(l.href)}
-                      className="text-cream/60 hover:text-cream text-sm transition-colors"
+                      className="text-cream/50 hover:text-cream text-sm transition-colors"
                     >
                       {l.label}
                     </button>
@@ -842,60 +838,48 @@ export default function Home() {
               </ul>
             </div>
 
-            {/* Hours */}
             <div>
               <h4 className="font-semibold text-cream mb-4">Opening Hours</h4>
               <ul className="space-y-2">
                 {HOURS.map((h) => (
                   <li key={h.day} className="text-sm">
-                    <p className="text-cream/60">{h.day}</p>
+                    <p className="text-cream/50">{h.day}</p>
                     <p className="text-cream font-medium">{h.time}</p>
                   </li>
                 ))}
               </ul>
             </div>
 
-            {/* Contact */}
             <div>
               <h4 className="font-semibold text-cream mb-4">Contact</h4>
               <ul className="space-y-3">
                 <li>
                   <a
-                    href="tel:+918010470334"
-                    className="flex items-center gap-2 text-cream/60 hover:text-cream text-sm transition-colors"
+                    href="tel:+917517328661"
+                    className="flex items-center gap-2 text-cream/50 hover:text-cream text-sm transition-colors"
                   >
-                    <Phone className="h-4 w-4" /> +91 80104 70334
+                    <Phone className="h-4 w-4" /> +91 75173 28661
                   </a>
                 </li>
                 <li>
                   <a
-                    href="mailto:hello@cafefromthetree.com"
-                    className="flex items-center gap-2 text-cream/60 hover:text-cream text-sm transition-colors"
+                    href="mailto:info@zenzicafe.com"
+                    className="flex items-center gap-2 text-cream/50 hover:text-cream text-sm transition-colors"
                   >
-                    <Mail className="h-4 w-4" /> hello@cafefromthetree.com
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://instagram.com/cafefromthetree"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-cream/60 hover:text-cream text-sm transition-colors"
-                  >
-                    <Instagram className="h-4 w-4" /> @cafefromthetree
+                    <Mail className="h-4 w-4" /> info@zenzicafe.com
                   </a>
                 </li>
                 <li>
                   <button
                     onClick={() =>
                       window.open(
-                        'https://www.google.co.in/maps/place/Cafe+From+The+Tree,+KP/@18.540862,73.8873651,17z',
+                        'https://www.google.co.in/maps/place/ZENZI+Restaurant+Cafe/@18.5356005,73.8749616,17z',
                         '_blank'
                       )
                     }
-                    className="flex items-center gap-2 text-cream/60 hover:text-cream text-sm transition-colors"
+                    className="flex items-center gap-2 text-cream/50 hover:text-cream text-sm transition-colors"
                   >
-                    <MapPin className="h-4 w-4" /> Koregaon Park, Pune
+                    <MapPin className="h-4 w-4" /> Dhole Patil Road, Pune
                   </button>
                 </li>
               </ul>
@@ -905,11 +889,11 @@ export default function Home() {
           <Separator className="my-8 bg-cream/10" />
 
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-cream/40 text-sm">
-              &copy; {new Date().getFullYear()} Cafe From The Tree. All rights reserved.
+            <p className="text-cream/30 text-sm">
+              &copy; {new Date().getFullYear()} ZENZI Restaurant Cafe. All rights reserved.
             </p>
-            <p className="text-cream/40 text-xs">
-              Crafted with <Heart className="inline h-3 w-3 text-warm" /> in Pune
+            <p className="text-cream/30 text-xs">
+              Crafted with <Heart className="inline h-3 w-3 text-gold" /> in Pune
             </p>
           </div>
         </div>
@@ -919,11 +903,12 @@ export default function Home() {
       {showScrollTop && (
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="fixed bottom-6 right-6 z-50 bg-primary hover:bg-forest-light text-primary-foreground rounded-full p-3 shadow-lg transition-all duration-300 animate-in fade-in slide-in-from-bottom-4"
+          className="fixed bottom-6 right-6 z-50 bg-primary hover:bg-burgundy-light text-primary-foreground rounded-full p-3 shadow-lg transition-all duration-300 animate-in fade-in slide-in-from-bottom-4"
         >
           <ArrowUp className="h-5 w-5" />
         </button>
       )}
+
       </div>
     </>
   );
